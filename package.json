@@ -1,0 +1,34 @@
+{
+  "name": "portfolio-backend",
+  "private": true,
+  "description": "gql backend for my personal portfolio/resume website",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc -w",
+    "dev": "nodemon dist/index.js",
+    "migrate": "yarn prisma migrate save --experimental && yarn prisma migrate up --experimental && yarn prisma generate",
+    "prisma-studio": "npx prisma studio --experimental"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.5.1"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.5.1",
+    "@types/node": "^14.6.0",
+    "@typescript-eslint/eslint-plugin": "^3.6.1",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "prettier": "2.0.5",
+    "typescript": "^4.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/link2cory/portfolio-backend"
+  },
+  "bugs": {
+    "url": "https://github.com/link2cory/portfolio-backend/issues"
+  }
+}
