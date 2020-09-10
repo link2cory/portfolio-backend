@@ -9,8 +9,8 @@
 
 declare global {
   interface NexusGenCustomOutputProperties<TypeName extends string> {
+    crud: NexusPrisma<TypeName, 'crud'>
     model: NexusPrisma<TypeName, 'model'>
-    crud: any
   }
 }
 
@@ -19,6 +19,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  BioWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
@@ -35,14 +38,17 @@ export interface NexusGenScalars {
 export interface NexusGenRootTypes {
   Bio: { // root type
     email: string; // String!
+    github: string; // String!
     name: string; // String!
     objective: string; // String!
     tagline: string; // String!
+    website?: string | null; // String
   }
   Query: {};
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  BioWhereUniqueInput: NexusGenInputs['BioWhereUniqueInput'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
@@ -53,16 +59,23 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Bio: { // field return type
     email: string; // String!
+    github: string; // String!
     name: string; // String!
     objective: string; // String!
     tagline: string; // String!
+    website: string | null; // String
   }
   Query: { // field return type
-    bio: NexusGenRootTypes['Bio']; // Bio!
+    bio: NexusGenRootTypes['Bio'] | null; // Bio
   }
 }
 
 export interface NexusGenArgTypes {
+  Query: {
+    bio: { // args
+      where: NexusGenInputs['BioWhereUniqueInput']; // BioWhereUniqueInput!
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -72,7 +85,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Bio" | "Query";
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = "BioWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 

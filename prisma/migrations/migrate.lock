@@ -1,3 +1,4 @@
 # Prisma Migrate lockfile v1
 
 20200910185728-init
+20200910225439-add-website-field-to-bio

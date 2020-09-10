@@ -4,11 +4,17 @@
 
 type Bio {
   email: String!
+  github: String!
   name: String!
   objective: String!
   tagline: String!
+  website: String
+}
+
+input BioWhereUniqueInput {
+  id: Int
 }
 
 type Query {
-  bio: Bio!
+  bio(where: BioWhereUniqueInput!): Bio
 }

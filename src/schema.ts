@@ -7,7 +7,11 @@ import * as types from "./types";
 
 const schema = makeSchema({
   types,
-  plugins: [nexusSchemaPrisma()],
+  plugins: [
+    nexusSchemaPrisma({
+      experimentalCRUD: true,
+    }),
+  ],
   outputs: {
     schema: path.join(__dirname, "./../schema.graphql"),
     typegen: path.join(__dirname, "./generated/nexus.ts"),
