@@ -7,8 +7,8 @@ const Bio = objectType({
     t.string("tagline");
     t.string("email");
     t.string("objective");
-    t.url("github", (bio) => new URL(bio.github));
-    t.url("website", (bio) => new URL(bio.website));
+    // t.url("github", (bio) => new URL(bio.github));
+    // t.url("website", (bio) => new URL(bio.website));
   },
 });
 
