@@ -11,7 +11,11 @@
     "prisma-studio": "npx prisma studio --experimental"
   },
   "dependencies": {
-    "@prisma/client": "^2.5.1"
+    "@nexus/schema": "^0.15.0",
+    "@prisma/client": "^2.5.1",
+    "apollo-server": "^2.17.0",
+    "graphql": "^15.3.0",
+    "graphql-scalars": "^1.2.7"
   },
   "devDependencies": {
     "@prisma/cli": "^2.5.1",
