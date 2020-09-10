@@ -3,19 +3,16 @@
  * Do not make changes to this file directly
  */
 
-import * as faces from "../interfaces"
-import { core } from "@nexus/schema"
-declare global {
-  interface NexusGenCustomInputMethods<TypeName extends string> {
-    url<FieldName extends string>(fieldName: FieldName, opts?: core.ScalarInputFieldConfig<core.GetGen3<"inputTypes", TypeName, FieldName>>): void // "URL";
-  }
-}
-declare global {
-  interface NexusGenCustomOutputMethods<TypeName extends string> {
-    url<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "URL";
-  }
-}
 
+
+
+
+declare global {
+  interface NexusGenCustomOutputProperties<TypeName extends string> {
+    model: NexusPrisma<TypeName, 'model'>
+    crud: any
+  }
+}
 
 declare global {
   interface NexusGen extends NexusGenTypes {}
@@ -33,11 +30,15 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
-  URL: URL
 }
 
 export interface NexusGenRootTypes {
-  Bio: faces.BioInterface;
+  Bio: { // root type
+    email: string; // String!
+    name: string; // String!
+    objective: string; // String!
+    tagline: string; // String!
+  }
   Query: {};
 }
 
@@ -47,17 +48,14 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   Float: NexusGenScalars['Float'];
   Boolean: NexusGenScalars['Boolean'];
   ID: NexusGenScalars['ID'];
-  URL: NexusGenScalars['URL'];
 }
 
 export interface NexusGenFieldTypes {
   Bio: { // field return type
     email: string; // String!
-    github: NexusGenScalars['URL']; // URL!
     name: string; // String!
     objective: string; // String!
     tagline: string; // String!
-    website: NexusGenScalars['URL']; // URL!
   }
   Query: { // field return type
     bio: NexusGenRootTypes['Bio']; // Bio!
@@ -80,12 +78,12 @@ export type NexusGenEnumNames = never;
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String" | "URL";
+export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 
 export type NexusGenUnionNames = never;
 
 export interface NexusGenTypes {
-  context: {};
+  context: any;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   argTypes: NexusGenArgTypes;
