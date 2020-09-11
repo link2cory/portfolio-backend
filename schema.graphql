@@ -11,10 +11,41 @@ type Bio {
   website: String
 }
 
+input BioCreateInput {
+  email: String!
+  github: String!
+  name: String!
+  objective: String!
+  tagline: String!
+  website: String
+}
+
+input BioUpdateInput {
+  email: StringFieldUpdateOperationsInput
+  github: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  objective: StringFieldUpdateOperationsInput
+  tagline: StringFieldUpdateOperationsInput
+  website: NullableStringFieldUpdateOperationsInput
+}
+
 input BioWhereUniqueInput {
   id: Int
 }
 
+type Mutation {
+  createOneBio(data: BioCreateInput!): Bio!
+  updateOneBio(data: BioUpdateInput!, where: BioWhereUniqueInput!): Bio
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type Query {
   bio(where: BioWhereUniqueInput!): Bio
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
