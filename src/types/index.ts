@@ -1,2 +1,4 @@
 export { Query, Mutation } from "./resolvers";
-export { Bio } from "./models";
+export {
+  Bio, User, UserToken, UserCreateInput,
+} from "./models";

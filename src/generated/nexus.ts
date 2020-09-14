@@ -44,6 +44,11 @@ export interface NexusGenInputs {
   StringFieldUpdateOperationsInput: { // input type
     set?: string | null; // String
   }
+  UserCreateInput: { // input type
+    email: string; // String!
+    name?: string | null; // String
+    password: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -68,6 +73,13 @@ export interface NexusGenRootTypes {
   }
   Mutation: {};
   Query: {};
+  User: { // root type
+    email: string; // String!
+    name?: string | null; // String
+  }
+  UserToken: { // root type
+    token: string; // String!
+  }
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
@@ -76,6 +88,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   BioWhereUniqueInput: NexusGenInputs['BioWhereUniqueInput'];
   NullableStringFieldUpdateOperationsInput: NexusGenInputs['NullableStringFieldUpdateOperationsInput'];
   StringFieldUpdateOperationsInput: NexusGenInputs['StringFieldUpdateOperationsInput'];
+  UserCreateInput: NexusGenInputs['UserCreateInput'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
@@ -94,10 +107,19 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createOneBio: NexusGenRootTypes['Bio']; // Bio!
+    createOneUser: NexusGenRootTypes['User']; // User!
+    createUser: NexusGenRootTypes['UserToken']; // UserToken!
     updateOneBio: NexusGenRootTypes['Bio'] | null; // Bio
   }
   Query: { // field return type
     bio: NexusGenRootTypes['Bio'] | null; // Bio
+  }
+  User: { // field return type
+    email: string; // String!
+    name: string | null; // String
+  }
+  UserToken: { // field return type
+    token: string; // String!
   }
 }
 
@@ -105,6 +127,13 @@ export interface NexusGenArgTypes {
   Mutation: {
     createOneBio: { // args
       data: NexusGenInputs['BioCreateInput']; // BioCreateInput!
+    }
+    createOneUser: { // args
+      data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    }
+    createUser: { // args
+      email?: string | null; // String
+      password?: string | null; // String
     }
     updateOneBio: { // args
       data: NexusGenInputs['BioUpdateInput']; // BioUpdateInput!
@@ -123,9 +152,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Bio" | "Mutation" | "Query";
+export type NexusGenObjectNames = "Bio" | "Mutation" | "Query" | "User" | "UserToken";
 
-export type NexusGenInputNames = "BioCreateInput" | "BioUpdateInput" | "BioWhereUniqueInput" | "NullableStringFieldUpdateOperationsInput" | "StringFieldUpdateOperationsInput";
+export type NexusGenInputNames = "BioCreateInput" | "BioUpdateInput" | "BioWhereUniqueInput" | "NullableStringFieldUpdateOperationsInput" | "StringFieldUpdateOperationsInput" | "UserCreateInput";
 
 export type NexusGenEnumNames = never;
 

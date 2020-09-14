@@ -35,6 +35,8 @@ input BioWhereUniqueInput {
 
 type Mutation {
   createOneBio(data: BioCreateInput!): Bio!
+  createOneUser(data: UserCreateInput!): User!
+  createUser(email: String, password: String): UserToken!
   updateOneBio(data: BioUpdateInput!, where: BioWhereUniqueInput!): Bio
 }
 
@@ -44,8 +46,24 @@ input NullableStringFieldUpdateOperationsInput {
 
 type Query {
   bio(where: BioWhereUniqueInput!): Bio
+  me: User!
 }
 
 input StringFieldUpdateOperationsInput {
   set: String
+}
+
+type User {
+  email: String!
+  name: String
+}
+
+input UserCreateInput {
+  email: String!
+  name: String
+  password: String!
+}
+
+type UserToken {
+  token: String!
 }
