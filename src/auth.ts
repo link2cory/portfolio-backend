@@ -28,46 +28,28 @@ const getTokenFromAuthHeader = (req: IncomingMessage) => {
   return null;
 };
 
-// req.req.headers.authorization.replace("Bearer ", "") || null;
+const verifyPassword = (user: User, password: string) => bcrypt.compareSync(password, user.password);
 
-// export const verifyUserCredentials = async (
-// user: User,
-// prisma: PrismaClient,
-// ) => {
-// const persistedUser = await prisma.user.findOne({
-// where: { email: user.email },
-// });
-//
-// return persistedUser
-// ? bcrypt.compareSync(user.password, persistedUser.password)
-// ? persistedUser
-// : null
-// : null;
-// };
-
-const verifyUserExists = async (user: User, prisma: PrismaClient) => {
+const getUserOrNullFromEmail = async (email: string, prisma: PrismaClient) => {
   const persistedUser = await prisma.user.findOne({
-    where: { email: user.email },
+    where: { email },
   });
 
   return persistedUser;
 };
 
-const getUserFromToken = (token: string, prisma: PrismaClient) => {
+const getUserOrNullFromToken = async (token: string, prisma: PrismaClient) => {
   const user = decodeToken(token);
-  if (user) {
-    return verifyUserExists(user, prisma);
-  }
-  return null;
+  return user ? getUserOrNullFromEmail(user.email, prisma) : null;
 };
 
-export const getUserFromRequest = (
+export const getUserFromRequest = async (
   req: IncomingMessage,
   prisma: PrismaClient,
 ) => {
   const token = getTokenFromAuthHeader(req);
   if (token) {
-    const user = getUserFromToken(token, prisma);
+    const user = await getUserOrNullFromToken(token, prisma);
     return user;
   }
   return null;
