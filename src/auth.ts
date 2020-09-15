@@ -6,16 +6,15 @@ import { PrismaClient, User } from "@prisma/client";
 
 export const hashPassword = (password: string) => bcrypt.hashSync(password, 3);
 
-// @todo: put secret in .env
 export const getTokenFromUser = (user: User) => ({
-  token: jwt.sign(user, "CHANGE_THIS_SECRET"),
+  token: jwt.sign(user, process.env.SECRET_KEY),
 });
 
 const isUser = (input: any): input is User => (input as User).email !== undefined;
 
 const decodeToken = (token: string): User | null => {
   try {
-    const decoded = jwt.verify(token, "CHANGE_THIS_SECRET");
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
     return isUser(decoded) ? decoded : null;
   } catch (e) {
     return null;
