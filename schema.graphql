@@ -36,6 +36,7 @@ input BioWhereUniqueInput {
 type Mutation {
   createOneBio(data: BioCreateInput!): Bio!
   createOneUser(userData: UserCreateInput!): UserToken!
+  login(credentials: UserCredentialsType!): UserToken!
   updateOneBio(data: BioUpdateInput!, where: BioWhereUniqueInput!): Bio
 }
 
@@ -61,6 +62,11 @@ type User {
 input UserCreateInput {
   email: String!
   name: String
+  password: String!
+}
+
+input UserCredentialsType {
+  email: String!
   password: String!
 }
 

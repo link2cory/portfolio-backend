@@ -1,5 +1,9 @@
 import { arg, mutationField } from "@nexus/schema";
-import { getTokenFromUser, hashPassword } from "../../auth";
+import {
+  getTokenFromUser,
+  getUserTokenFromCredentials,
+  hashPassword,
+} from "../../auth";
 
 export const createOneUser = mutationField("createOneUser", {
   type: "UserToken",
@@ -15,4 +19,12 @@ export const createOneUser = mutationField("createOneUser", {
     });
     return getTokenFromUser(user);
   },
+});
+
+export const login = mutationField("login", {
+  type: "UserToken",
+  args: {
+    credentials: arg({ type: "UserCredentialsType", required: true }),
+  },
+  resolve: async (_root, { credentials: { email, password } }, { prisma }) => getUserTokenFromCredentials(email, password, prisma),
 });

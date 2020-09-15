@@ -54,3 +54,17 @@ export const getUserFromRequest = async (
   }
   return null;
 };
+
+export const getUserTokenFromCredentials = async (
+  email: string,
+  password: string,
+  prisma: PrismaClient,
+) => {
+  const user = await getUserOrNullFromEmail(email, prisma);
+
+  if (user && verifyPassword(user, password)) {
+    return getTokenFromUser(user);
+  }
+
+  return { token: "" };
+};
