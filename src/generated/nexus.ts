@@ -135,8 +135,7 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['BioCreateInput']; // BioCreateInput!
     }
     createOneUser: { // args
-      email?: string | null; // String
-      password?: string | null; // String
+      userData: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }
     updateOneBio: { // args
       data: NexusGenInputs['BioUpdateInput']; // BioUpdateInput!

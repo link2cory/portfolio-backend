@@ -35,7 +35,7 @@ input BioWhereUniqueInput {
 
 type Mutation {
   createOneBio(data: BioCreateInput!): Bio!
-  createOneUser(email: String, password: String): UserToken!
+  createOneUser(userData: UserCreateInput!): UserToken!
   updateOneBio(data: BioUpdateInput!, where: BioWhereUniqueInput!): Bio
 }
 

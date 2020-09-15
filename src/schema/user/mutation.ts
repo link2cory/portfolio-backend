@@ -1,19 +1,16 @@
-import { mutationField, stringArg } from "@nexus/schema";
-import bcrypt from "bcrypt";
-import { getTokenFromUser } from "../../auth";
+import { arg, mutationField } from "@nexus/schema";
+import { getTokenFromUser, hashPassword } from "../../auth";
 
 export const createOneUser = mutationField("createOneUser", {
   type: "UserToken",
   args: {
-    email: stringArg(),
-    password: stringArg(),
+    userData: arg({ type: "UserCreateInput", required: true }),
   },
-  resolve: async (_parent, { email, password }, { prisma, request }) => {
-    const hashedPassword = bcrypt.hashSync(password, 3);
+  resolve: async (_root, { userData }, { prisma }) => {
     const user = await prisma.user.create({
       data: {
-        email,
-        password: hashedPassword,
+        ...userData,
+        password: hashPassword(userData.password),
       },
     });
     return getTokenFromUser(user);
