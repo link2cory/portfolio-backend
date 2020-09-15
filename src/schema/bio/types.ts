@@ -1,6 +1,6 @@
 import { objectType } from "@nexus/schema";
 
-const Bio = objectType({
+export const Bio = objectType({
   name: "Bio",
   definition(t) {
     t.model.name();
@@ -11,5 +11,3 @@ const Bio = objectType({
     t.model.website();
   },
 });
-
-export default Bio;

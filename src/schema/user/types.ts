@@ -1,6 +1,6 @@
 import { inputObjectType, objectType } from "@nexus/schema";
 
-const User = objectType({
+export const User = objectType({
   name: "User",
   definition(t) {
     t.model.name();
@@ -35,4 +35,3 @@ export const UserCreateInput = inputObjectType({
 // t.string("password", { required: true });
 // },
 // });
-export default User;

@@ -49,6 +49,10 @@ export interface NexusGenInputs {
     name?: string | null; // String
     password: string; // String!
   }
+  UserWhereUniqueInput: { // input type
+    email?: string | null; // String
+    id?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
@@ -89,6 +93,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   NullableStringFieldUpdateOperationsInput: NexusGenInputs['NullableStringFieldUpdateOperationsInput'];
   StringFieldUpdateOperationsInput: NexusGenInputs['StringFieldUpdateOperationsInput'];
   UserCreateInput: NexusGenInputs['UserCreateInput'];
+  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
@@ -107,12 +112,13 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createOneBio: NexusGenRootTypes['Bio']; // Bio!
-    createOneUser: NexusGenRootTypes['User']; // User!
-    createUser: NexusGenRootTypes['UserToken']; // UserToken!
+    createOneUser: NexusGenRootTypes['UserToken']; // UserToken!
     updateOneBio: NexusGenRootTypes['Bio'] | null; // Bio
   }
   Query: { // field return type
     bio: NexusGenRootTypes['Bio'] | null; // Bio
+    me: NexusGenRootTypes['User']; // User!
+    user: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
     email: string; // String!
@@ -129,9 +135,6 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['BioCreateInput']; // BioCreateInput!
     }
     createOneUser: { // args
-      data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
-    }
-    createUser: { // args
       email?: string | null; // String
       password?: string | null; // String
     }
@@ -144,6 +147,9 @@ export interface NexusGenArgTypes {
     bio: { // args
       where: NexusGenInputs['BioWhereUniqueInput']; // BioWhereUniqueInput!
     }
+    user: { // args
+      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
   }
 }
 
@@ -154,7 +160,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Bio" | "Mutation" | "Query" | "User" | "UserToken";
 
-export type NexusGenInputNames = "BioCreateInput" | "BioUpdateInput" | "BioWhereUniqueInput" | "NullableStringFieldUpdateOperationsInput" | "StringFieldUpdateOperationsInput" | "UserCreateInput";
+export type NexusGenInputNames = "BioCreateInput" | "BioUpdateInput" | "BioWhereUniqueInput" | "NullableStringFieldUpdateOperationsInput" | "StringFieldUpdateOperationsInput" | "UserCreateInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 
