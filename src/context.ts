@@ -1,8 +1,7 @@
-import { IncomingMessage } from "http";
-
 import { PrismaClient, User } from "@prisma/client";
 
 import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
+
 import { getUserFromRequest } from "./auth";
 
 const prisma = new PrismaClient();
