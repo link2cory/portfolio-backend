@@ -3,11 +3,10 @@ import path from "path";
 import { makeSchema } from "@nexus/schema";
 import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema";
 
-import * as userSchema from "./user";
 import * as bioSchema from "./bio";
 
 export default makeSchema({
-  types: [userSchema, bioSchema],
+  types: [bioSchema],
   plugins: [
     nexusSchemaPrisma({
       experimentalCRUD: true,

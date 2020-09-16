@@ -1,7 +1,8 @@
-import { IncomingMessage } from "http";
+// import { IncomingMessage } from "http";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { APIGatewayProxyEvent as IncomingMessage } from "aws-lambda";
 import { PrismaClient, User } from "@prisma/client";
 
 export const hashPassword = (password: string) => bcrypt.hashSync(password, 3);

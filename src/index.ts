@@ -1,20 +1,18 @@
-import express from "express";
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer } from "apollo-server-lambda";
 
 import { createContext } from "./context";
 import schema from "./schema";
 
-const corsConfig = {
+const cors = {
   credentials: true,
   allowedHeaders: ["Authorization"],
   exposedHeaders: ["Authorization"],
 };
 
-const server = new ApolloServer({ schema, context: createContext });
-
-const app = express();
-server.applyMiddleware({ app, cors: corsConfig });
-
-app.listen({ port: 4000 }, () => {
-  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
+const server = new ApolloServer({
+  schema,
+  context: createContext,
+  playground: true,
 });
+
+export const handler = server.createHandler({ cors });

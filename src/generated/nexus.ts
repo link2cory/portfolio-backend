@@ -19,44 +19,6 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  BioCreateInput: { // input type
-    email: string; // String!
-    github: string; // String!
-    name: string; // String!
-    objective: string; // String!
-    tagline: string; // String!
-    website?: string | null; // String
-  }
-  BioUpdateInput: { // input type
-    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    github?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    objective?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    tagline?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    website?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-  }
-  BioWhereUniqueInput: { // input type
-    id?: number | null; // Int
-  }
-  NullableStringFieldUpdateOperationsInput: { // input type
-    set?: string | null; // String
-  }
-  StringFieldUpdateOperationsInput: { // input type
-    set?: string | null; // String
-  }
-  UserCreateInput: { // input type
-    email: string; // String!
-    name?: string | null; // String
-    password: string; // String!
-  }
-  UserCredentialsType: { // input type
-    email: string; // String!
-    password: string; // String!
-  }
-  UserWhereUniqueInput: { // input type
-    email?: string | null; // String
-    id?: number | null; // Int
-  }
 }
 
 export interface NexusGenEnums {
@@ -72,33 +34,12 @@ export interface NexusGenScalars {
 
 export interface NexusGenRootTypes {
   Bio: { // root type
-    email: string; // String!
-    github: string; // String!
     name: string; // String!
-    objective: string; // String!
-    tagline: string; // String!
-    website?: string | null; // String
   }
-  Mutation: {};
   Query: {};
-  User: { // root type
-    email: string; // String!
-    name?: string | null; // String
-  }
-  UserToken: { // root type
-    token: string; // String!
-  }
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  BioCreateInput: NexusGenInputs['BioCreateInput'];
-  BioUpdateInput: NexusGenInputs['BioUpdateInput'];
-  BioWhereUniqueInput: NexusGenInputs['BioWhereUniqueInput'];
-  NullableStringFieldUpdateOperationsInput: NexusGenInputs['NullableStringFieldUpdateOperationsInput'];
-  StringFieldUpdateOperationsInput: NexusGenInputs['StringFieldUpdateOperationsInput'];
-  UserCreateInput: NexusGenInputs['UserCreateInput'];
-  UserCredentialsType: NexusGenInputs['UserCredentialsType'];
-  UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
   Float: NexusGenScalars['Float'];
@@ -108,57 +49,14 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Bio: { // field return type
-    email: string; // String!
-    github: string; // String!
     name: string; // String!
-    objective: string; // String!
-    tagline: string; // String!
-    website: string | null; // String
-  }
-  Mutation: { // field return type
-    createOneBio: NexusGenRootTypes['Bio']; // Bio!
-    createOneUser: NexusGenRootTypes['UserToken']; // UserToken!
-    login: NexusGenRootTypes['UserToken']; // UserToken!
-    updateOneBio: NexusGenRootTypes['Bio'] | null; // Bio
   }
   Query: { // field return type
-    bio: NexusGenRootTypes['Bio'] | null; // Bio
-    me: NexusGenRootTypes['User']; // User!
-    user: NexusGenRootTypes['User'] | null; // User
-  }
-  User: { // field return type
-    email: string; // String!
-    name: string | null; // String
-  }
-  UserToken: { // field return type
-    token: string; // String!
+    username: NexusGenRootTypes['Bio']; // Bio!
   }
 }
 
 export interface NexusGenArgTypes {
-  Mutation: {
-    createOneBio: { // args
-      data: NexusGenInputs['BioCreateInput']; // BioCreateInput!
-    }
-    createOneUser: { // args
-      userData: NexusGenInputs['UserCreateInput']; // UserCreateInput!
-    }
-    login: { // args
-      credentials: NexusGenInputs['UserCredentialsType']; // UserCredentialsType!
-    }
-    updateOneBio: { // args
-      data: NexusGenInputs['BioUpdateInput']; // BioUpdateInput!
-      where: NexusGenInputs['BioWhereUniqueInput']; // BioWhereUniqueInput!
-    }
-  }
-  Query: {
-    bio: { // args
-      where: NexusGenInputs['BioWhereUniqueInput']; // BioWhereUniqueInput!
-    }
-    user: { // args
-      where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -166,9 +64,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Bio" | "Mutation" | "Query" | "User" | "UserToken";
+export type NexusGenObjectNames = "Bio" | "Query";
 
-export type NexusGenInputNames = "BioCreateInput" | "BioUpdateInput" | "BioWhereUniqueInput" | "NullableStringFieldUpdateOperationsInput" | "StringFieldUpdateOperationsInput" | "UserCreateInput" | "UserCredentialsType" | "UserWhereUniqueInput";
+export type NexusGenInputNames = never;
 
 export type NexusGenEnumNames = never;
 

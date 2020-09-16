@@ -3,78 +3,9 @@
 
 
 type Bio {
-  email: String!
-  github: String!
   name: String!
-  objective: String!
-  tagline: String!
-  website: String
-}
-
-input BioCreateInput {
-  email: String!
-  github: String!
-  name: String!
-  objective: String!
-  tagline: String!
-  website: String
-}
-
-input BioUpdateInput {
-  email: StringFieldUpdateOperationsInput
-  github: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  objective: StringFieldUpdateOperationsInput
-  tagline: StringFieldUpdateOperationsInput
-  website: NullableStringFieldUpdateOperationsInput
-}
-
-input BioWhereUniqueInput {
-  id: Int
-}
-
-type Mutation {
-  createOneBio(data: BioCreateInput!): Bio!
-  createOneUser(userData: UserCreateInput!): UserToken!
-  login(credentials: UserCredentialsType!): UserToken!
-  updateOneBio(data: BioUpdateInput!, where: BioWhereUniqueInput!): Bio
-}
-
-input NullableStringFieldUpdateOperationsInput {
-  set: String
 }
 
 type Query {
-  bio(where: BioWhereUniqueInput!): Bio
-  me: User!
-  user(where: UserWhereUniqueInput!): User
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
-type User {
-  email: String!
-  name: String
-}
-
-input UserCreateInput {
-  email: String!
-  name: String
-  password: String!
-}
-
-input UserCredentialsType {
-  email: String!
-  password: String!
-}
-
-type UserToken {
-  token: String!
-}
-
-input UserWhereUniqueInput {
-  email: String
-  id: Int
+  username: Bio!
 }
