@@ -28,7 +28,7 @@ const serverlessConfiguration: Serverless = {
       ],
     },
   },
-  plugins: ["serverless-offline", "serverless-plugin-typescript"],
+  plugins: ["serverless-plugin-parcel", "serverless-offline"],
 };
 
 module.exports = serverlessConfiguration;

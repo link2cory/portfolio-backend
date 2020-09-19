@@ -34,10 +34,11 @@
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-plugin-import": "^2.22.0",
     "nodemon": "^2.0.4",
+    "parcel-bundler": "^1.12.4",
     "prettier": "2.0.5",
     "serverless": "^2.0.0",
     "serverless-offline": "^6.7.0",
-    "serverless-plugin-typescript": "^1.1.9",
+    "serverless-plugin-parcel": "^0.1.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
