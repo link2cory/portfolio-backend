@@ -5,6 +5,7 @@
 type Bio {
   email: String!
   github: String!
+  jobs(after: JobWhereUniqueInput, before: JobWhereUniqueInput, first: Int, last: Int): [Job!]!
   name: String!
   objective: String!
   tagline: String!
@@ -12,6 +13,21 @@ type Bio {
 }
 
 input BioCreateInput {
+  email: String!
+  github: String!
+  jobs: JobCreateManyWithoutProfileInput
+  name: String!
+  objective: String!
+  tagline: String!
+  website: String
+}
+
+input BioCreateOneWithoutJobsInput {
+  connect: BioWhereUniqueInput
+  create: BioCreateWithoutJobsInput
+}
+
+input BioCreateWithoutJobsInput {
   email: String!
   github: String!
   name: String!
@@ -23,21 +39,398 @@ input BioCreateInput {
 input BioUpdateInput {
   email: StringFieldUpdateOperationsInput
   github: StringFieldUpdateOperationsInput
+  jobs: JobUpdateManyWithoutProfileInput
   name: StringFieldUpdateOperationsInput
   objective: StringFieldUpdateOperationsInput
   tagline: StringFieldUpdateOperationsInput
   website: NullableStringFieldUpdateOperationsInput
 }
 
+input BioUpdateOneRequiredWithoutJobsInput {
+  connect: BioWhereUniqueInput
+  create: BioCreateWithoutJobsInput
+  update: BioUpdateWithoutJobsDataInput
+  upsert: BioUpsertWithoutJobsInput
+}
+
+input BioUpdateWithoutJobsDataInput {
+  email: StringFieldUpdateOperationsInput
+  github: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  objective: StringFieldUpdateOperationsInput
+  tagline: StringFieldUpdateOperationsInput
+  website: NullableStringFieldUpdateOperationsInput
+}
+
+input BioUpsertWithoutJobsInput {
+  create: BioCreateWithoutJobsInput!
+  update: BioUpdateWithoutJobsDataInput!
+}
+
+input BioWhereInput {
+  AND: [BioWhereInput!]
+  email: StringFilter
+  github: StringFilter
+  id: IntFilter
+  jobs: JobListRelationFilter
+  name: StringFilter
+  NOT: [BioWhereInput!]
+  objective: StringFilter
+  OR: [BioWhereInput!]
+  tagline: StringFilter
+  website: StringNullableFilter
+}
+
 input BioWhereUniqueInput {
+  id: Int
+}
+
+type Company {
+  description: String
+  logo: String
+  name: String!
+  website: String
+}
+
+input CompanyCreateInput {
+  description: String
+  jobs: JobCreateManyWithoutCompanyInput
+  logo: String
+  name: String!
+  website: String
+}
+
+input CompanyCreateOneWithoutJobsInput {
+  connect: CompanyWhereUniqueInput
+  create: CompanyCreateWithoutJobsInput
+}
+
+input CompanyCreateWithoutJobsInput {
+  description: String
+  logo: String
+  name: String!
+  website: String
+}
+
+input CompanyUpdateInput {
+  description: NullableStringFieldUpdateOperationsInput
+  jobs: JobUpdateManyWithoutCompanyInput
+  logo: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  website: NullableStringFieldUpdateOperationsInput
+}
+
+input CompanyUpdateOneWithoutJobsInput {
+  connect: CompanyWhereUniqueInput
+  create: CompanyCreateWithoutJobsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CompanyUpdateWithoutJobsDataInput
+  upsert: CompanyUpsertWithoutJobsInput
+}
+
+input CompanyUpdateWithoutJobsDataInput {
+  description: NullableStringFieldUpdateOperationsInput
+  logo: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  website: NullableStringFieldUpdateOperationsInput
+}
+
+input CompanyUpsertWithoutJobsInput {
+  create: CompanyCreateWithoutJobsInput!
+  update: CompanyUpdateWithoutJobsDataInput!
+}
+
+input CompanyWhereInput {
+  AND: [CompanyWhereInput!]
+  description: StringNullableFilter
+  id: IntFilter
+  jobs: JobListRelationFilter
+  logo: StringNullableFilter
+  name: StringFilter
+  NOT: [CompanyWhereInput!]
+  OR: [CompanyWhereInput!]
+  website: StringNullableFilter
+}
+
+input CompanyWhereUniqueInput {
+  id: Int
+}
+
+scalar DateTime
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+type Job {
+  company: Company
+  endDate: DateTime
+  profile: Bio!
+  role: String
+  roleDescription: String
+  startDate: DateTime
+}
+
+input JobCreateInput {
+  company: CompanyCreateOneWithoutJobsInput
+  endDate: DateTime
+  profile: BioCreateOneWithoutJobsInput!
+  role: String
+  roleDescription: String
+  startDate: DateTime
+}
+
+input JobCreateManyWithoutCompanyInput {
+  connect: [JobWhereUniqueInput!]
+  create: [JobCreateWithoutCompanyInput!]
+}
+
+input JobCreateManyWithoutProfileInput {
+  connect: [JobWhereUniqueInput!]
+  create: [JobCreateWithoutProfileInput!]
+}
+
+input JobCreateWithoutCompanyInput {
+  endDate: DateTime
+  profile: BioCreateOneWithoutJobsInput!
+  role: String
+  roleDescription: String
+  startDate: DateTime
+}
+
+input JobCreateWithoutProfileInput {
+  company: CompanyCreateOneWithoutJobsInput
+  endDate: DateTime
+  role: String
+  roleDescription: String
+  startDate: DateTime
+}
+
+input JobListRelationFilter {
+  every: JobWhereInput
+  none: JobWhereInput
+  some: JobWhereInput
+}
+
+input JobScalarWhereInput {
+  AND: [JobScalarWhereInput!]
+  companyId: IntNullableFilter
+  endDate: DateTimeNullableFilter
+  id: IntFilter
+  NOT: [JobScalarWhereInput!]
+  OR: [JobScalarWhereInput!]
+  profileId: IntFilter
+  role: StringNullableFilter
+  roleDescription: StringNullableFilter
+  startDate: DateTimeNullableFilter
+}
+
+input JobUpdateInput {
+  company: CompanyUpdateOneWithoutJobsInput
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  profile: BioUpdateOneRequiredWithoutJobsInput
+  role: NullableStringFieldUpdateOperationsInput
+  roleDescription: NullableStringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input JobUpdateManyDataInput {
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  role: NullableStringFieldUpdateOperationsInput
+  roleDescription: NullableStringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input JobUpdateManyWithoutCompanyInput {
+  connect: [JobWhereUniqueInput!]
+  create: [JobCreateWithoutCompanyInput!]
+  delete: [JobWhereUniqueInput!]
+  deleteMany: [JobScalarWhereInput!]
+  disconnect: [JobWhereUniqueInput!]
+  set: [JobWhereUniqueInput!]
+  update: [JobUpdateWithWhereUniqueWithoutCompanyInput!]
+  updateMany: [JobUpdateManyWithWhereNestedInput!]
+  upsert: [JobUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input JobUpdateManyWithoutProfileInput {
+  connect: [JobWhereUniqueInput!]
+  create: [JobCreateWithoutProfileInput!]
+  delete: [JobWhereUniqueInput!]
+  deleteMany: [JobScalarWhereInput!]
+  disconnect: [JobWhereUniqueInput!]
+  set: [JobWhereUniqueInput!]
+  update: [JobUpdateWithWhereUniqueWithoutProfileInput!]
+  updateMany: [JobUpdateManyWithWhereNestedInput!]
+  upsert: [JobUpsertWithWhereUniqueWithoutProfileInput!]
+}
+
+input JobUpdateManyWithWhereNestedInput {
+  data: JobUpdateManyDataInput!
+  where: JobScalarWhereInput!
+}
+
+input JobUpdateWithoutCompanyDataInput {
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  profile: BioUpdateOneRequiredWithoutJobsInput
+  role: NullableStringFieldUpdateOperationsInput
+  roleDescription: NullableStringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input JobUpdateWithoutProfileDataInput {
+  company: CompanyUpdateOneWithoutJobsInput
+  endDate: NullableDateTimeFieldUpdateOperationsInput
+  role: NullableStringFieldUpdateOperationsInput
+  roleDescription: NullableStringFieldUpdateOperationsInput
+  startDate: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input JobUpdateWithWhereUniqueWithoutCompanyInput {
+  data: JobUpdateWithoutCompanyDataInput!
+  where: JobWhereUniqueInput!
+}
+
+input JobUpdateWithWhereUniqueWithoutProfileInput {
+  data: JobUpdateWithoutProfileDataInput!
+  where: JobWhereUniqueInput!
+}
+
+input JobUpsertWithWhereUniqueWithoutCompanyInput {
+  create: JobCreateWithoutCompanyInput!
+  update: JobUpdateWithoutCompanyDataInput!
+  where: JobWhereUniqueInput!
+}
+
+input JobUpsertWithWhereUniqueWithoutProfileInput {
+  create: JobCreateWithoutProfileInput!
+  update: JobUpdateWithoutProfileDataInput!
+  where: JobWhereUniqueInput!
+}
+
+input JobWhereInput {
+  AND: [JobWhereInput!]
+  company: CompanyWhereInput
+  companyId: IntNullableFilter
+  endDate: DateTimeNullableFilter
+  id: IntFilter
+  NOT: [JobWhereInput!]
+  OR: [JobWhereInput!]
+  profile: BioWhereInput
+  profileId: IntFilter
+  role: StringNullableFilter
+  roleDescription: StringNullableFilter
+  startDate: DateTimeNullableFilter
+}
+
+input JobWhereUniqueInput {
   id: Int
 }
 
 type Mutation {
   createOneBio(data: BioCreateInput!): Bio!
+  createOneCompany(data: CompanyCreateInput!): Company!
+  createOneJob(data: JobCreateInput!): Job!
   createOneUser(userData: UserCreateInput!): UserToken!
   login(credentials: UserCredentialsType!): UserToken!
   updateOneBio(data: BioUpdateInput!, where: BioWhereUniqueInput!): Bio
+  updateOneCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company
+  updateOneJob(data: JobUpdateInput!, where: JobWhereUniqueInput!): Job
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
 }
 
 input NullableStringFieldUpdateOperationsInput {
@@ -46,12 +439,43 @@ input NullableStringFieldUpdateOperationsInput {
 
 type Query {
   bio(where: BioWhereUniqueInput!): Bio
+  company(where: CompanyWhereUniqueInput!): Company
+  job(where: JobWhereUniqueInput!): Job
+  jobs(after: JobWhereUniqueInput, before: JobWhereUniqueInput, first: Int, last: Int, where: JobWhereInput): [Job!]!
   me: User!
   user(where: UserWhereUniqueInput!): User
 }
 
 input StringFieldUpdateOperationsInput {
   set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 type User {

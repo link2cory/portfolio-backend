@@ -5,9 +5,11 @@ import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema";
 
 import * as userSchema from "./user";
 import * as bioSchema from "./bio";
+import * as jobSchema from "./job";
+import * as companySchema from "./company";
 
 export default makeSchema({
-  types: [userSchema, bioSchema],
+  types: [userSchema, bioSchema, jobSchema, companySchema],
   plugins: [
     nexusSchemaPrisma({
       experimentalCRUD: true,
