@@ -3,6 +3,7 @@ import path from "path";
 import { makeSchema } from "@nexus/schema";
 import { nexusSchemaPrisma } from "nexus-plugin-prisma/schema";
 
+import { GraphQLSchema } from "graphql";
 import * as bioSchema from "./bio";
 
 export default makeSchema({
@@ -16,4 +17,4 @@ export default makeSchema({
     schema: path.join(__dirname, "./../../schema.graphql"),
     typegen: path.join(__dirname, "./../generated/nexus.ts"),
   },
-});
+}) as GraphQLSchema;

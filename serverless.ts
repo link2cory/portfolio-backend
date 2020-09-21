@@ -1,12 +1,15 @@
 import type { Serverless } from "serverless/aws";
 
 const serverlessConfiguration: Serverless = {
-  frameworkVersion: "2.1.0",
+  frameworkVersion: "2.1.1",
   service: "apollo-lambda",
   provider: {
     name: "aws",
     runtime: "nodejs12.x",
     region: "us-west-2",
+    environment: {
+      NODE_ENV: "production",
+    },
   },
   functions: {
     graphql: {
@@ -28,7 +31,7 @@ const serverlessConfiguration: Serverless = {
       ],
     },
   },
-  plugins: ["serverless-plugin-parcel", "serverless-offline"],
+  plugins: ["serverless-offline"],
 };
 
 module.exports = serverlessConfiguration;
