@@ -2,14 +2,14 @@ import { PrismaClient, User } from "@prisma/client";
 
 import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
 
-import { getUserFromRequest } from "./auth";
+import { getUserFromRequest, DecodedUserToken } from "./auth";
 
 const prisma = new PrismaClient();
 
 export interface Context {
   incomingContext: ExpressContext;
   prisma: PrismaClient;
-  user: User | null;
+  user: DecodedUserToken | null;
 }
 
 export async function createContext(
