@@ -9,6 +9,7 @@ type Bio {
   name: String!
   objective: String!
   tagline: String!
+  user: User
   website: String
 }
 
@@ -19,6 +20,7 @@ input BioCreateInput {
   name: String!
   objective: String!
   tagline: String!
+  user: UserCreateOneWithoutBioInput
   website: String
 }
 
@@ -33,7 +35,14 @@ input BioCreateWithoutJobsInput {
   name: String!
   objective: String!
   tagline: String!
+  user: UserCreateOneWithoutBioInput
   website: String
+}
+
+input BioListRelationFilter {
+  every: BioWhereInput
+  none: BioWhereInput
+  some: BioWhereInput
 }
 
 input BioUpdateInput {
@@ -43,6 +52,7 @@ input BioUpdateInput {
   name: StringFieldUpdateOperationsInput
   objective: StringFieldUpdateOperationsInput
   tagline: StringFieldUpdateOperationsInput
+  user: UserUpdateOneWithoutBioInput
   website: NullableStringFieldUpdateOperationsInput
 }
 
@@ -59,6 +69,7 @@ input BioUpdateWithoutJobsDataInput {
   name: StringFieldUpdateOperationsInput
   objective: StringFieldUpdateOperationsInput
   tagline: StringFieldUpdateOperationsInput
+  user: UserUpdateOneWithoutBioInput
   website: NullableStringFieldUpdateOperationsInput
 }
 
@@ -78,6 +89,8 @@ input BioWhereInput {
   objective: StringFilter
   OR: [BioWhereInput!]
   tagline: StringFilter
+  user: UserWhereInput
+  userId: IntNullableFilter
   website: StringNullableFilter
 }
 
@@ -489,6 +502,17 @@ input UserCreateInput {
   password: String!
 }
 
+input UserCreateOneWithoutBioInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutBioInput
+}
+
+input UserCreateWithoutBioInput {
+  email: String!
+  name: String
+  password: String!
+}
+
 input UserCredentialsType {
   email: String!
   password: String!
@@ -496,6 +520,37 @@ input UserCredentialsType {
 
 type UserToken {
   token: String!
+}
+
+input UserUpdateOneWithoutBioInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutBioInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutBioDataInput
+  upsert: UserUpsertWithoutBioInput
+}
+
+input UserUpdateWithoutBioDataInput {
+  email: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+}
+
+input UserUpsertWithoutBioInput {
+  create: UserCreateWithoutBioInput!
+  update: UserUpdateWithoutBioDataInput!
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  Bio: BioListRelationFilter
+  email: StringFilter
+  id: IntFilter
+  name: StringNullableFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  password: StringFilter
 }
 
 input UserWhereUniqueInput {

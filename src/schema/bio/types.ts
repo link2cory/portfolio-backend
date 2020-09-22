@@ -10,5 +10,6 @@ export const Bio = objectType({
     t.model.github();
     t.model.website();
     t.model.jobs();
+    t.model.user();
   },
 });
