@@ -7,13 +7,13 @@ const serverlessConfiguration: Serverless = {
     name: "aws",
     runtime: "nodejs12.x",
     region: "us-west-2",
-    environment: {
-      NODE_ENV: "production",
-    },
+    // environment: {
+    // NODE_ENV: "production",
+    // },
   },
   functions: {
     graphql: {
-      handler: "src/index.handler",
+      handler: "dist/index.handler",
       events: [
         {
           http: {
@@ -32,6 +32,15 @@ const serverlessConfiguration: Serverless = {
     },
   },
   plugins: ["serverless-offline"],
+  custom: {
+    // this is required because the way that serverless-offline
+    // instantiates and uses lambdas using multiple threads
+    // is incompatible with graphql's schema verification logic
+    // see https://github.com/graphql/graphql-js/issues/2801
+    "serverless-offline": {
+      useChildProcesses: true,
+    },
+  },
 };
 
 module.exports = serverlessConfiguration;
