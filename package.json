@@ -6,9 +6,8 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "nodemon -r dotenv/config dist/index.js dotenv_config_path=./.env/dev.env",
+    "dev": "nodemon --exec 'serverless offline'",
     "deploy": "serverless deploy",
-    "deploy-offline": "serverless offline",
     "prisma:migrate": "yarn prisma migrate save --experimental && yarn prisma migrate up --experimental && yarn prisma generate",
     "prisma:studio": "npx prisma studio --experimental",
     "nexus:generate": "ts-node --transpile-only src/schema"
