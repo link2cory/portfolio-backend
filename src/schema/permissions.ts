@@ -44,16 +44,21 @@ const isJobOwner = rule({ cache: "contextual" })(
 // async (_parent, _args, _ctx) => true,
 // );
 
-export default shield({
-  Query: {
-    jobs: isAuthenticated,
-    job: isAuthenticated,
+export default shield(
+  {
+    Query: {
+      jobs: isAuthenticated,
+      job: isAuthenticated,
+    },
+    Mutation: {
+      createOneJob: isAuthenticated,
+      updateOneJob: isJobOwner,
+      createOneBio: isAuthenticated,
+      updateOneBio: isBioOwner,
+      createOneCompany: isAuthenticated,
+    },
   },
-  Mutation: {
-    createOneJob: isAuthenticated,
-    updateOneJob: isJobOwner,
-    createOneBio: isAuthenticated,
-    updateOneBio: isBioOwner,
-    createOneCompany: isAuthenticated,
+  {
+    debug: process.env.NODE_ENV === "development",
   },
-});
+);
