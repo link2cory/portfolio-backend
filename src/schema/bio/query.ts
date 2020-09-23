@@ -6,4 +6,3 @@ export const addBioCrudToQuery = extendType({
     t.crud.bio();
   },
 });
-

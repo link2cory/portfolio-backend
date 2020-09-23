@@ -1,7 +1,8 @@
-import { IncomingMessage } from "http";
+// import { IncomingMessage } from "http";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { APIGatewayProxyEvent as IncomingMessage } from "aws-lambda";
 import { PrismaClient, User } from "@prisma/client";
 
 export interface DecodedUserToken {
@@ -28,7 +29,7 @@ const decodeToken = (token: string): DecodedUserToken | null => {
 };
 
 const getTokenFromAuthHeader = (req: IncomingMessage) => {
-  if (req.headers.authorization) {
+  if (req.headers && req.headers.authorization) {
     return req.headers.authorization.replace("Bearer ", "");
   }
   return null;
@@ -56,6 +57,7 @@ export const getUserFromRequest = async (
   req: IncomingMessage,
   prisma: PrismaClient,
 ) => {
+  console.log(`secret key is: ${process.env.SECRET_KEY}`);
   const token = getTokenFromAuthHeader(req);
   if (token) {
     const decodedUser = decodeToken(token);

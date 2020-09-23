@@ -1,23 +1,24 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
-import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
+import type { APIGatewayProxyEvent } from "aws-lambda";
+// import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
 
 import { getUserFromRequest, DecodedUserToken } from "./auth";
 
 const prisma = new PrismaClient();
 
 export interface Context {
-  incomingContext: ExpressContext;
+  incomingContext: APIGatewayProxyEvent;
   prisma: PrismaClient;
   user: DecodedUserToken | null;
 }
 
 export async function createContext(
-  incomingContext: ExpressContext,
+  incomingContext: APIGatewayProxyEvent,
 ): Promise<Context> {
   return {
     incomingContext,
     prisma,
-    user: await getUserFromRequest(incomingContext.req, prisma),
+    user: await getUserFromRequest(incomingContext, prisma),
   };
 }
