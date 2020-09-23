@@ -26,6 +26,7 @@ export interface NexusGenInputs {
     name: string; // String!
     objective: string; // String!
     tagline: string; // String!
+    user?: NexusGenInputs['UserCreateOneWithoutBioInput'] | null; // UserCreateOneWithoutBioInput
     website?: string | null; // String
   }
   BioCreateOneWithoutJobsInput: { // input type
@@ -38,7 +39,13 @@ export interface NexusGenInputs {
     name: string; // String!
     objective: string; // String!
     tagline: string; // String!
+    user?: NexusGenInputs['UserCreateOneWithoutBioInput'] | null; // UserCreateOneWithoutBioInput
     website?: string | null; // String
+  }
+  BioListRelationFilter: { // input type
+    every?: NexusGenInputs['BioWhereInput'] | null; // BioWhereInput
+    none?: NexusGenInputs['BioWhereInput'] | null; // BioWhereInput
+    some?: NexusGenInputs['BioWhereInput'] | null; // BioWhereInput
   }
   BioUpdateInput: { // input type
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -47,6 +54,7 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     objective?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     tagline?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneWithoutBioInput'] | null; // UserUpdateOneWithoutBioInput
     website?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
   }
   BioUpdateOneRequiredWithoutJobsInput: { // input type
@@ -61,6 +69,7 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     objective?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     tagline?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneWithoutBioInput'] | null; // UserUpdateOneWithoutBioInput
     website?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
   }
   BioUpsertWithoutJobsInput: { // input type
@@ -78,6 +87,8 @@ export interface NexusGenInputs {
     objective?: NexusGenInputs['StringFilter'] | null; // StringFilter
     OR?: NexusGenInputs['BioWhereInput'][] | null; // [BioWhereInput!]
     tagline?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
     website?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   BioWhereUniqueInput: { // input type
@@ -401,9 +412,45 @@ export interface NexusGenInputs {
     name?: string | null; // String
     password: string; // String!
   }
+  UserCreateOneWithoutBioInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutBioInput'] | null; // UserCreateWithoutBioInput
+  }
+  UserCreateWithoutBioInput: { // input type
+    email: string; // String!
+    name?: string | null; // String
+    password: string; // String!
+  }
   UserCredentialsType: { // input type
     email: string; // String!
     password: string; // String!
+  }
+  UserUpdateOneWithoutBioInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    create?: NexusGenInputs['UserCreateWithoutBioInput'] | null; // UserCreateWithoutBioInput
+    delete?: boolean | null; // Boolean
+    disconnect?: boolean | null; // Boolean
+    update?: NexusGenInputs['UserUpdateWithoutBioDataInput'] | null; // UserUpdateWithoutBioDataInput
+    upsert?: NexusGenInputs['UserUpsertWithoutBioInput'] | null; // UserUpsertWithoutBioInput
+  }
+  UserUpdateWithoutBioDataInput: { // input type
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
+    password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  UserUpsertWithoutBioInput: { // input type
+    create: NexusGenInputs['UserCreateWithoutBioInput']; // UserCreateWithoutBioInput!
+    update: NexusGenInputs['UserUpdateWithoutBioDataInput']; // UserUpdateWithoutBioDataInput!
+  }
+  UserWhereInput: { // input type
+    AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    Bio?: NexusGenInputs['BioListRelationFilter'] | null; // BioListRelationFilter
+    email?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    name?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    password?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
@@ -440,6 +487,7 @@ export interface NexusGenRootTypes {
   }
   Job: { // root type
     endDate?: NexusGenScalars['DateTime'] | null; // DateTime
+    id: number; // Int!
     role?: string | null; // String
     roleDescription?: string | null; // String
     startDate?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -459,6 +507,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   BioCreateInput: NexusGenInputs['BioCreateInput'];
   BioCreateOneWithoutJobsInput: NexusGenInputs['BioCreateOneWithoutJobsInput'];
   BioCreateWithoutJobsInput: NexusGenInputs['BioCreateWithoutJobsInput'];
+  BioListRelationFilter: NexusGenInputs['BioListRelationFilter'];
   BioUpdateInput: NexusGenInputs['BioUpdateInput'];
   BioUpdateOneRequiredWithoutJobsInput: NexusGenInputs['BioUpdateOneRequiredWithoutJobsInput'];
   BioUpdateWithoutJobsDataInput: NexusGenInputs['BioUpdateWithoutJobsDataInput'];
@@ -508,7 +557,13 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   StringFilter: NexusGenInputs['StringFilter'];
   StringNullableFilter: NexusGenInputs['StringNullableFilter'];
   UserCreateInput: NexusGenInputs['UserCreateInput'];
+  UserCreateOneWithoutBioInput: NexusGenInputs['UserCreateOneWithoutBioInput'];
+  UserCreateWithoutBioInput: NexusGenInputs['UserCreateWithoutBioInput'];
   UserCredentialsType: NexusGenInputs['UserCredentialsType'];
+  UserUpdateOneWithoutBioInput: NexusGenInputs['UserUpdateOneWithoutBioInput'];
+  UserUpdateWithoutBioDataInput: NexusGenInputs['UserUpdateWithoutBioDataInput'];
+  UserUpsertWithoutBioInput: NexusGenInputs['UserUpsertWithoutBioInput'];
+  UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
@@ -526,6 +581,7 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     objective: string; // String!
     tagline: string; // String!
+    user: NexusGenRootTypes['User'] | null; // User
     website: string | null; // String
   }
   Company: { // field return type
@@ -537,6 +593,7 @@ export interface NexusGenFieldTypes {
   Job: { // field return type
     company: NexusGenRootTypes['Company'] | null; // Company
     endDate: NexusGenScalars['DateTime'] | null; // DateTime
+    id: number; // Int!
     profile: NexusGenRootTypes['Bio']; // Bio!
     role: string | null; // String
     roleDescription: string | null; // String
@@ -637,7 +694,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Bio" | "Company" | "Job" | "Mutation" | "Query" | "User" | "UserToken";
 
-export type NexusGenInputNames = "BioCreateInput" | "BioCreateOneWithoutJobsInput" | "BioCreateWithoutJobsInput" | "BioUpdateInput" | "BioUpdateOneRequiredWithoutJobsInput" | "BioUpdateWithoutJobsDataInput" | "BioUpsertWithoutJobsInput" | "BioWhereInput" | "BioWhereUniqueInput" | "CompanyCreateInput" | "CompanyCreateOneWithoutJobsInput" | "CompanyCreateWithoutJobsInput" | "CompanyUpdateInput" | "CompanyUpdateOneWithoutJobsInput" | "CompanyUpdateWithoutJobsDataInput" | "CompanyUpsertWithoutJobsInput" | "CompanyWhereInput" | "CompanyWhereUniqueInput" | "DateTimeNullableFilter" | "IntFilter" | "IntNullableFilter" | "JobCreateInput" | "JobCreateManyWithoutCompanyInput" | "JobCreateManyWithoutProfileInput" | "JobCreateWithoutCompanyInput" | "JobCreateWithoutProfileInput" | "JobListRelationFilter" | "JobScalarWhereInput" | "JobUpdateInput" | "JobUpdateManyDataInput" | "JobUpdateManyWithWhereNestedInput" | "JobUpdateManyWithoutCompanyInput" | "JobUpdateManyWithoutProfileInput" | "JobUpdateWithWhereUniqueWithoutCompanyInput" | "JobUpdateWithWhereUniqueWithoutProfileInput" | "JobUpdateWithoutCompanyDataInput" | "JobUpdateWithoutProfileDataInput" | "JobUpsertWithWhereUniqueWithoutCompanyInput" | "JobUpsertWithWhereUniqueWithoutProfileInput" | "JobWhereInput" | "JobWhereUniqueInput" | "NestedDateTimeNullableFilter" | "NestedIntFilter" | "NestedIntNullableFilter" | "NestedStringFilter" | "NestedStringNullableFilter" | "NullableDateTimeFieldUpdateOperationsInput" | "NullableStringFieldUpdateOperationsInput" | "StringFieldUpdateOperationsInput" | "StringFilter" | "StringNullableFilter" | "UserCreateInput" | "UserCredentialsType" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "BioCreateInput" | "BioCreateOneWithoutJobsInput" | "BioCreateWithoutJobsInput" | "BioListRelationFilter" | "BioUpdateInput" | "BioUpdateOneRequiredWithoutJobsInput" | "BioUpdateWithoutJobsDataInput" | "BioUpsertWithoutJobsInput" | "BioWhereInput" | "BioWhereUniqueInput" | "CompanyCreateInput" | "CompanyCreateOneWithoutJobsInput" | "CompanyCreateWithoutJobsInput" | "CompanyUpdateInput" | "CompanyUpdateOneWithoutJobsInput" | "CompanyUpdateWithoutJobsDataInput" | "CompanyUpsertWithoutJobsInput" | "CompanyWhereInput" | "CompanyWhereUniqueInput" | "DateTimeNullableFilter" | "IntFilter" | "IntNullableFilter" | "JobCreateInput" | "JobCreateManyWithoutCompanyInput" | "JobCreateManyWithoutProfileInput" | "JobCreateWithoutCompanyInput" | "JobCreateWithoutProfileInput" | "JobListRelationFilter" | "JobScalarWhereInput" | "JobUpdateInput" | "JobUpdateManyDataInput" | "JobUpdateManyWithWhereNestedInput" | "JobUpdateManyWithoutCompanyInput" | "JobUpdateManyWithoutProfileInput" | "JobUpdateWithWhereUniqueWithoutCompanyInput" | "JobUpdateWithWhereUniqueWithoutProfileInput" | "JobUpdateWithoutCompanyDataInput" | "JobUpdateWithoutProfileDataInput" | "JobUpsertWithWhereUniqueWithoutCompanyInput" | "JobUpsertWithWhereUniqueWithoutProfileInput" | "JobWhereInput" | "JobWhereUniqueInput" | "NestedDateTimeNullableFilter" | "NestedIntFilter" | "NestedIntNullableFilter" | "NestedStringFilter" | "NestedStringNullableFilter" | "NullableDateTimeFieldUpdateOperationsInput" | "NullableStringFieldUpdateOperationsInput" | "StringFieldUpdateOperationsInput" | "StringFilter" | "StringNullableFilter" | "UserCreateInput" | "UserCreateOneWithoutBioInput" | "UserCreateWithoutBioInput" | "UserCredentialsType" | "UserUpdateOneWithoutBioInput" | "UserUpdateWithoutBioDataInput" | "UserUpsertWithoutBioInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = never;
 
