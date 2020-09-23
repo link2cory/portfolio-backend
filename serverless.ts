@@ -7,9 +7,9 @@ const serverlessConfiguration: Serverless = {
     name: "aws",
     runtime: "nodejs12.x",
     region: "us-west-2",
-    // environment: {
-    // NODE_ENV: "production",
-    // },
+    environment: {
+      SECRET_KEY: process.env.SECRET_KEY,
+    },
   },
   functions: {
     graphql: {
@@ -31,7 +31,7 @@ const serverlessConfiguration: Serverless = {
       ],
     },
   },
-  plugins: ["serverless-offline"],
+  plugins: ["serverless-dotenv-plugin", "serverless-offline"],
   custom: {
     // this is required because the way that serverless-offline
     // instantiates and uses lambdas using multiple threads
@@ -39,6 +39,9 @@ const serverlessConfiguration: Serverless = {
     // see https://github.com/graphql/graphql-js/issues/2801
     "serverless-offline": {
       useChildProcesses: true,
+    },
+    dotenv: {
+      basePath: "./.env/",
     },
   },
 };
