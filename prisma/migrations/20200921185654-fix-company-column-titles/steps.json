@@ -1,0 +1,53 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Company",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Company",
+      "field": "description",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Company",
+      "field": "logo",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Company",
+      "field": "website",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Company",
+      "field": "companyName"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Company",
+      "field": "companyDescription"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Company",
+      "field": "companyLogo"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Company",
+      "field": "companyWebsite"
+    }
+  ]
+}

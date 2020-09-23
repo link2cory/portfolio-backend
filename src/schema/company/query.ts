@@ -1,8 +1,8 @@
 import { extendType } from "@nexus/schema";
 
-export const addBioCrudToQuery = extendType({
+export const addCompanyCrudToQuery = extendType({
   type: "Query",
   definition(t) {
-    t.crud.bio();
+    t.crud.company();
   },
 });

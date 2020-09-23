@@ -7,4 +7,3 @@ export const addBioCrudToMutation = extendType({
     t.crud.updateOneBio();
   },
 });
-
