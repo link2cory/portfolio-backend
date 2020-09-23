@@ -23,5 +23,5 @@ export default applyMiddleware(
       typegen: path.join(__dirname, "./../generated/nexus.ts"),
     },
   }),
-  permissions
+  permissions,
 );
